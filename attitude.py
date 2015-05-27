@@ -49,8 +49,8 @@ def ACT(word):
 
 #non funziona perche non sono correlati -.-
 def POT(word):
-    strong = wn.synsets("strong")[1]
-    weak  = wn.synsets("weak")[1]
+    strong = wn.synsets("strong")[0]
+    weak  = wn.synsets("weak")[0]
     word = wn.synsets(word)[0]
 
     print ""
