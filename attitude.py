@@ -47,9 +47,10 @@ def ACT(word):
           + ")/" + str(active.shortest_path_distance(passive)) + " = "
     return (word.shortest_path_distance(passive) - word.shortest_path_distance(active))/ float(active.shortest_path_distance(passive))
 
+#non funziona perche non sono correlati -.-
 def POT(word):
-    strong = wn.synsets("strong")[0]
-    weak  = wn.synsets("weak")[0]
+    strong = wn.synsets("strong")[1]
+    weak  = wn.synsets("weak")[1]
     word = wn.synsets(word)[0]
 
     print ""
