@@ -1,6 +1,7 @@
 from nltk.corpus import wordnet as wn
 
-#Il nostro scopo e quello di misurare il significato personale espresso in un testo. Per una tale impresa abbia successo,
+#Il nostro scopo e quello di misurare il significato personale espresso in un testo.
+# Per una tale impresa abbia successo,
 
 def disambiguateTerms(terms):
         for t_i in terms:    # t_i is target term
@@ -31,32 +32,44 @@ def EVA(word):
     bad  = wn.synsets("bad")[0]
     word = wn.synsets(word)[0]
 
-    print ""
-    print "(" + str(word.shortest_path_distance(bad)) + " - " + str(word.shortest_path_distance(good)) + ")/" + \
-          str(good.shortest_path_distance(bad))
+    #print "(" + str(word.shortest_path_distance(bad)) + " - " + str(word.shortest_path_distance(good)) + ")/" + \
+    #      str(good.shortest_path_distance(bad))
 
-    return (word.shortest_path_distance(bad) - word.shortest_path_distance(good))/ float(good.shortest_path_distance(bad))
+    try:
+        return (word.shortest_path_distance(bad) - word.shortest_path_distance(good))/ \
+               float(good.shortest_path_distance(bad))
+    except TypeError:
+        return 0
 
 def ACT(word):
     active = wn.synsets("active")[0]
     passive  = wn.synsets("passive")[0]
     word = wn.synsets(word)[0]
 
-    print ""
-    print "(" + str(word.shortest_path_distance(passive)) + " - " + str(word.shortest_path_distance(active)) \
-          + ")/" + str(active.shortest_path_distance(passive)) + " = "
-    return (word.shortest_path_distance(passive) - word.shortest_path_distance(active))/ float(active.shortest_path_distance(passive))
+    #print "(" + str(word.shortest_path_distance(passive)) + " - " + str(word.shortest_path_distance(active)) \
+    #          + ")/" + str(active.shortest_path_distance(passive)) + " = "
+
+    try:
+
+        return (word.shortest_path_distance(passive) - word.shortest_path_distance(active))/ \
+               float(active.shortest_path_distance(passive))
+    except TypeError:
+        return 0
 
 #non funziona perche non sono correlati -.-
 def POT(word):
-    strong = wn.synsets("strong")[0]
-    weak  = wn.synsets("weak")[0]
+    strong = wn.synsets("strong", "a")[0]
+    weak  = wn.synsets("weak", "a")[0]
     word = wn.synsets(word)[0]
 
-    print ""
-    print "(" + str(word.shortest_path_distance(weak)) + " - " + str(word.shortest_path_distance(strong)) \
-          + ")/" + str(strong.shortest_path_distance(weak)) + " = "
-    return (word.shortest_path_distance(weak) - word.shortest_path_distance(strong))/ float(strong.shortest_path_distance(weak))
+    #print "(" + str(word.shortest_path_distance(weak)) + " - " + str(word.shortest_path_distance(strong)) \
+    #          + ")/" + str(strong.shortest_path_distance(weak)) + " = "
+
+    try:
+        return (word.shortest_path_distance(weak) - word.shortest_path_distance(strong))/ \
+               float(strong.shortest_path_distance(weak))
+    except TypeError:
+        return 0
 
 def common(w1, w2):
     print ""
